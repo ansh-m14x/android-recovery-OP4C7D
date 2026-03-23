@@ -140,4 +140,6 @@ TARGET_USES_LOGD := true
 
 # Avb
 BOARD_AVB_ENABLE := false
-BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+# You can also comment out or remove the rollback index line to be safe:
+# BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+
