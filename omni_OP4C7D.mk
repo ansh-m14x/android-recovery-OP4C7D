@@ -1,7 +1,7 @@
 #
 # Copyright (C) 2019 The Android Open Source Project
 # Copyright (C) 2019 The TWRP Open Source Project
-# Copyright (C) 2020 SebaUbuntu's TWRP device tree generator 
+# Copyright (C) 2020 SebaUbuntu's TWRP device tree generator
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,19 +23,19 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
 $(call inherit-product, vendor/omni/config/common.mk)
 
 # Device identifier.
-PRODUCT_BRAND := oppo
 PRODUCT_DEVICE := OP4C7D
-PRODUCT_MANUFACTURER := OPPO
-PRODUCT_MODEL := OP4C7D
 PRODUCT_NAME := omni_OP4C7D
-PRODUCT_RELEASE_NAME := OPPO A31
+PRODUCT_BRAND := oppo
+PRODUCT_MODEL := CPH2015
+PRODUCT_MANUFACTURER := oppo
+PRODUCT_RELEASE_NAME := Oppo A31
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=OP4C7D \
     BUILD_PRODUCT=OP4C7D \
     TARGET_DEVICE=OP4C7D
 
-# Dimen
-TARGET_SCREEN_HEIGHT := 1560
+# Display Dimensions (Oppo A31 Actual: 720x1600)
+TARGET_SCREEN_HEIGHT := 1600
 TARGET_SCREEN_WIDTH := 720
 TW_THEME := portrait_hdpi
