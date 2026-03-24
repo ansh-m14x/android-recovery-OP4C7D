@@ -18,7 +18,7 @@ TARGET_2ND_CPU_VARIANT := generic
 
 TARGET_USES_64_BIT_BINDER := true
 
-# Kernel
+# Kernel - Based on your prebuilt files
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_BOOTIMG_HEADER_VERSION := 2
 BOARD_KERNEL_BASE := 0x40078000
@@ -28,17 +28,17 @@ BOARD_SECOND_OFFSET := 0x00000000
 BOARD_TAGS_OFFSET := 0x0bc08000
 BOARD_DTB_OFFSET := 0x0bc08000
 
-# Kernel Command Line
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
-BOARD_KERNEL_IMAGE_NAME := Image.gz
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+# Kernel Files (Matching your Screenshot)
+BOARD_KERNEL_IMAGE_NAME := image.gz-dtb
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/image.gz-dtb
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+
+# Kernel Command Line
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
-# Partitions (Size in Bytes)
+# Partitions (Oppo A31 Standard Sizes)
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
@@ -57,7 +57,6 @@ PB_BUILD_RECOVERY := true
 PB_MAINTAINER := Ansh_m14x
 PB_DEVICE_MODEL := CPH2015
 PB_TARGET_USES_64BIT := true
-PB_OFFICIAL := false
 
 # TWRP Specific Flags
 TW_THEME := portrait_hdpi
@@ -67,8 +66,8 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_DEVICE_VERSION := PBRP_V1_ANSH
 
-# Decryption & Security
-TW_INCLUDE_CRYPTO := false # Pehle recovery build hone de, fir crypto enable karenge
+# Decryption
+TW_INCLUDE_CRYPTO := false
 BOARD_USES_METADATA_PARTITION := true
 
 # Display & Brightness
