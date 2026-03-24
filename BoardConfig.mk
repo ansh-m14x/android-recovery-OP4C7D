@@ -1,3 +1,9 @@
+#
+# Copyright (C) 2026 The LineageOS Project
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
 DEVICE_PATH := device/oppo/OP4C7D
 
 # Architecture (ARM64 for MT6765)
@@ -15,13 +21,20 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := generic
 
-# Bootloader & Platform
-TARGET_BOOTLOADER_BOARD_NAME := oppo6765_19581
-TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := mt6765
+# APEX & Treble
+OVERRIDE_TARGET_FLATTEN_APEX := true
 TARGET_USES_64_BIT_BINDER := true
 
-# Kernel - Offsets (Stock A31 Accurate Values)
+# Platform & Bootloader
+TARGET_BOARD_PLATFORM := mt6765
+TARGET_BOOTLOADER_BOARD_NAME := oppo6765_19581
+TARGET_NO_BOOTLOADER := true
+
+# Kernel - The LineageOS Fix (Error line 79)
+# Note: Ensure your prebuilt kernel is named 'Image.gz-dtb' in prebuilts folder
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+
+# Kernel - Offsets (Stock A31 Accurate)
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_BOOTIMG_HEADER_VERSION := 1
 BOARD_KERNEL_BASE := 0x40078000
@@ -29,40 +42,40 @@ BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_RAMDISK_OFFSET := 0x11a88000
 BOARD_KERNEL_TAGS_OFFSET := 0x07808000
 
-# Kernel - Command Line
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=userdebug androidboot.selinux=permissive
+# Kernel - Boot Flags (The Secret Sauce)
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=userdebug
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.hardware=mt6765
 
-# Kernel - Build Args
+# Kernel - Build Args (Offsets + Header)
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
-# Kernel - Prebuilt (Ensure files are in device/oppo/OP4C7D/prebuilts/)
+# Kernel & DTBO - Prebuilt (Path only, No Partition Size)
 TARGET_FORCE_PREBUILT_KERNEL := true
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/kernel
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
 
-# Partitions (32MB Recovery)
+# Partitions (Only Recovery/Boot defined)
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
 
-# System Root & AVB (Crucial for Oppo)
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+# Verified Boot (Bypass Security)
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
-# Filesystem & Recovery
+# File Systems & Paths
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-# Path to your fstab (Check if it's fstab.mt6765 or recovery.fstab)
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.mt6765
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-# TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop (Commented because missing)
 
 # VINTF
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
