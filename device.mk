@@ -19,13 +19,15 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/image.gz-dtb:kernel \
     $(LOCAL_PATH)/prebuilt/dtbo.img:dtbo.img
 
-# Recovery Fstab - Triple Path Fix (Mount issue solver)
-# Hum ise 3 jagah copy kar rahe hain taaki mount fail na ho
+
+# --- Recovery Fstab (The Mount Fix) ---
+# Hum fstab ko 3 alag locations par copy kar rahe hain taaki 
+# kernel use kahin se bhi dhoond sake (Root, /etc, aur /system/etc)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery.fstab:recovery/root/system/etc/recovery.fstab \
     $(LOCAL_PATH)/recovery.fstab:recovery/root/etc/recovery.fstab \
-    $(LOCAL_PATH)/recovery.fstab:recovery/root/recovery.fstab
-
+    $(LOCAL_PATH)/recovery.fstab:recovery/root/recovery.fstab \
+    $(LOCAL_PATH)/recovery.fstab:recovery/root/fstab.mt6765
 # Default properties (ADB & Debugging Enabled)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0 \
