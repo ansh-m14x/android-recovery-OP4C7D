@@ -1,42 +1,29 @@
-#
-# Copyright 2020 The Android Open Source Project
-# Copyright (C) 2020 The LineageOS Project
-# Copyright (C) 2013-2020 OmniROM
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-# Branding & Device Info
+# Branding & Device Info (Oppo A31 Specific)
 ro.product.brand=oppo
 ro.product.name=CPH2015
 ro.product.device=OP4C7D
 ro.build.product=CPH2015
+ro.product.model=CPH2015
 
-# Treble & System
+# Build Description (Important to bypass security)
+ro.build.description=full_oppo6765_19581-user 9 PPR1.180610.011 eng.root.20211115.152708 release-keys
+ro.expect.recovery_id=0xbfeda1cc7be2f04640d91dcbba0ca6d45b0949e9000000000000000000000000
+
+# Treble & Debugging
 ro.treble.enabled=true
 ro.build.type=userdebug
 ro.debuggable=1
-
-# USB & MTP (Ensures storage shows up on PC)
-persist.sys.usb.config=mtp,adb
 ro.adb.secure=0
 
-# Graphics & UI
+# USB & MTP (PC par storage dikhane ke liye)
+persist.sys.usb.config=mtp,adb
+ro.sys.usb.storage.type=mtp
+ro.sys.usb.bicr=no
+ro.sys.usb.charging.only=yes
+
+# Display (Correct Density for A31)
 ro.sf.lcd_density=269
-ro.product.lcd_density=269
+qemu.hw.mainkeys=0
 
-# Audio & Media
-ro.audio.silent=0
-
-# Network (Useless in recovery, but prevents log errors)
-ro.telephony.default_network=9
+# Graphics
+ro.opengles.version=196610
