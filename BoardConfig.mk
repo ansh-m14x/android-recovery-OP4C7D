@@ -30,8 +30,8 @@ TARGET_BOARD_PLATFORM := mt6765
 TARGET_BOOTLOADER_BOARD_NAME := oppo6765_19581
 TARGET_NO_BOOTLOADER := true
 
-# Kernel - The LineageOS Fix (Error line 79)
-BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+# Kernel - The LineageOS Fix (Small 'i' and No 's')
+BOARD_KERNEL_IMAGE_NAME := image.gz-dtb
 
 # Kernel - Offsets (Stock A31 Accurate)
 BOARD_KERNEL_PAGESIZE := 2048
@@ -41,29 +41,29 @@ BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_RAMDISK_OFFSET := 0x11a88000
 BOARD_KERNEL_TAGS_OFFSET := 0x07808000
 
-# Kernel - Boot Flags (The Secret Sauce)
+# Kernel - Boot Flags
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=userdebug
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += androidboot.hardware=mt6765
 
-# Kernel - Build Args (Offsets + Header)
+# Kernel - Build Args
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
-# Kernel & DTBO - Prebuilt (Path Fix for Ninja Error)
+# Kernel & DTBO - Prebuilt (Path Fixed: prebuilt/image.gz-dtb)
 TARGET_FORCE_PREBUILT_KERNEL := true
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/Image.gz-dtb
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/image.gz-dtb
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
 
-# Partitions (Standard 32MB)
+# Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
 
-# Verified Boot (Bypass Security)
+# Verified Boot (Properly Enabled for Oppo)
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
@@ -73,8 +73,6 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 
-# Properties
+# Properties & VINTF
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-
-# VINTF
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
