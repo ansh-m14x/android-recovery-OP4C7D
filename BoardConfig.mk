@@ -55,11 +55,7 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 # --- PitchBlack Recovery Project Flags ---
 PB_BUILD_RECOVERY := true
 PB_MAINTAINER := Ansh_m14x
-PB_DEVICE_MODEL := CPH2015
 PB_TARGET_USES_64BIT := true
-
-# FIX for 'undeclared identifier PB_DEVICE_MODEL'
-COMMON_GLOBAL_CFLAGS += -DPB_DEVICE_MODEL=\"CPH2015\"
 
 # --- TWRP Specific Flags ---
 TW_THEME := portrait_hdpi
