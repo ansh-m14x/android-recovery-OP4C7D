@@ -31,7 +31,6 @@ TARGET_BOOTLOADER_BOARD_NAME := oppo6765_19581
 TARGET_NO_BOOTLOADER := true
 
 # Kernel - The LineageOS Fix (Error line 79)
-# Note: Ensure your prebuilt kernel is named 'Image.gz-dtb' in prebuilts folder
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
 # Kernel - Offsets (Stock A31 Accurate)
@@ -53,13 +52,13 @@ BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
-# Kernel & DTBO - Prebuilt (Path only, No Partition Size)
+# Kernel & DTBO - Prebuilt (Path Fix for Ninja Error)
 TARGET_FORCE_PREBUILT_KERNEL := true
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/kernel
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/Image.gz-dtb
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
 
-# Partitions (Only Recovery/Boot defined)
+# Partitions (Standard 32MB)
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
@@ -72,7 +71,7 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.mt6765
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
