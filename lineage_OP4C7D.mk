@@ -1,13 +1,15 @@
-# Inherit from those products. Most specific first.
-$(call inherit-product, build/make/target/product/core_64_bit.mk)
-$(call inherit-product, build/make/target/product/full_base_telephony.mk)
-$(call inherit-product, build/make/target/product/embedded.mk)
+# Inherit from your local core_64_bit.mk (Root of device tree)
+$(call inherit-product, device/oppo/OP4C7D/core_64_bit.mk)
+
+# Standard inheritance from build system
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
 
 # Inherit from device makefile
 $(call inherit-product, device/oppo/OP4C7D/device.mk)
 
-# Inherit common LineageOS product files
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit common LineageOS product files (if they exist)
+$(call inherit-product-if-exists, vendor/lineage/config/common_full_phone.mk)
 
 # Device details
 PRODUCT_DEVICE := OP4C7D
