@@ -1,26 +1,24 @@
-# mount point    fstype    device                                     flags
-/recovery        emmc      /dev/block/by-name/recovery                flags=display="Recovery";backup=1;flashimg=1
-/boot            emmc      /dev/block/by-name/boot                    flags=display="Boot";backup=1;flashimg=1
-/dtbo            emmc      /dev/block/by-name/dtbo                    flags=display="DTBO";backup=1;flashimg=1
-/vbmeta          emmc      /dev/block/by-name/vbmeta                  flags=display="Vbmeta";backup=1;flashimg=1
+# Android fstab file.
+# The filesystem that contains the actual partition table the kernel uses.
+#
+# <mount_point>    <fstype>    <device>                                     <flags>
+/recovery          emmc        /dev/block/by-name/recovery
+/boot              emmc        /dev/block/by-name/boot
+/dtbo              emmc        /dev/block/by-name/dtbo
+/vbmeta            emmc        /dev/block/by-name/vbmeta
 
-/system_root     ext4      /dev/block/by-name/system                  flags=display="System";wipeingui;backup=0
-/system_image    emmc      /dev/block/by-name/system                  flags=display="System Image";backup=1;flashimg=1
+/system            ext4        /dev/block/by-name/system
+/vendor            ext4        /dev/block/by-name/vendor
+/cache             ext4        /dev/block/by-name/cache
+/data              ext4        /dev/block/by-name/userdata                  wait,check,formattable,fileencryption=aes-256-xts
 
-/vendor          ext4      /dev/block/by-name/vendor                  flags=display="Vendor";wipeingui;backup=0
-/vendor_image    emmc      /dev/block/by-name/vendor                  flags=display="Vendor Image";backup=1;flashimg=1
+/metadata          emmc        /dev/block/by-name/metadata
+/misc              emmc        /dev/block/by-name/misc
+/nvram             emmc        /dev/block/by-name/nvram
+/nvdata            ext4        /dev/block/by-name/nvdata
+/nvcfg             ext4        /dev/block/by-name/nvcfg
+/persist           ext4        /dev/block/by-name/persist
 
-/cache           ext4      /dev/block/by-name/cache                   flags=display="Cache";wipeingui
-/data            ext4      /dev/block/by-name/userdata                flags=fileencryption=aes-256-xts:aes-256-cts
-
-/metadata        emmc      /dev/block/by-name/metadata
-/persistent      emmc      /dev/block/by-name/frp                     flags=display="FRP";backup=1
-/misc            emmc      /dev/block/by-name/misc                    flags=display="Misc";backup=1
-/para            emmc      /dev/block/by-name/para                    flags=display="Para";backup=1;wipeingui
-/nvram           emmc      /dev/block/by-name/nvram                   flags=display="Nvram";backup=1;flashimg=1
-/nvdata          ext4      /dev/block/by-name/nvdata                  flags=display="Nvdata";backup=1
-/nvcfg           ext4      /dev/block/by-name/nvcfg                   flags=display="Nvcfg";backup=1
-
-# External devices
-/external_sd     auto      /dev/block/mmcblk1p1    /dev/block/mmcblk1    flags=display="Micro SD card";storage;wipeingui;removable
-/usb_otg         auto      /dev/block/sda1         /dev/block/sda        flags=display="USB-OTG";storage;removable;wipeingui
+# External storage
+/external_sd       vfat        /dev/block/mmcblk1p1                         flags=storage;wipeingui;removable
+/usb_otg           vfat        /dev/block/sda1                              flags=storage;wipeingui;removable
