@@ -1,36 +1,25 @@
 #
-# Copyright (C) 2026 The LineageOS Project
+# Copyright (C) 2023 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
-LOCAL_PATH := device/oppo/OP4C7D
+# Product characteristics
+PRODUCT_CHARACTERISTICS := default
 
-# Rootdir files (Graphics & Basic Binaries)
-PRODUCT_PACKAGES += \
-    libfwdlockengine \
-    libGLESv2 \
-    libGLESv3 \
-    toybox \
-    sh
-
-# Kernel & DTBO Copy (Verified Working)
+# Core Files (Directly from your main folder)
+# Inhe ramdisk mein sahi jagah map kar rahe hain
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/image.gz-dtb:kernel \
-    $(LOCAL_PATH)/prebuilt/dtbo.img:dtbo.img
+    $(LOCAL_PATH)/recovery.fstab:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.mt6765 \
+    $(LOCAL_PATH)/init.mt6765.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.mt6765.rc \
+    $(LOCAL_PATH)/init.mt6765.usb.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.mt6765.usb.rc
 
+# Shipping API level
+PRODUCT_SHIPPING_API_LEVEL := 28
 
-# --- Recovery Fstab (The Mount Fix) ---
-# Hum fstab ko 3 alag locations par copy kar rahe hain taaki 
-# kernel use kahin se bhi dhoond sake (Root, /etc, aur /system/etc)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery.fstab:recovery/root/system/etc/recovery.fstab \
-    $(LOCAL_PATH)/recovery.fstab:recovery/root/etc/recovery.fstab \
-    $(LOCAL_PATH)/recovery.fstab:recovery/root/recovery.fstab \
-    $(LOCAL_PATH)/recovery.fstab:recovery/root/fstab.mt6765
-# Default properties (ADB & Debugging Enabled)
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.adb.secure=0 \
-    ro.debuggable=1 \
-    ro.secure=0 \
-    persist.sys.usb.config=mtp,adb
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)
+
+# Inherit the proprietary files
+$(call inherit-product, vendor/oppo/OP4C7D/OP4C7D-vendor.mk)
