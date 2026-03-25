@@ -69,3 +69,16 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
+
+# USB Configuration - ConfigFS ko false rakhna kyunki tera kernel purana path dhund raha hai
+TARGET_RECOVERY_USB_CONFIGFS := false
+TARGET_RECOVERY_USB_VID := 0x22D9
+TARGET_RECOVERY_USB_PID := 0x2765
+
+# Force ADB debugging and permissive mode
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.adb.secure=0 \
+    ro.debuggable=1 \
+    persist.sys.usb.config=adb \
+    sys.usb.config=adb
