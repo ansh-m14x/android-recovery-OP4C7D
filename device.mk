@@ -16,6 +16,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery.fstab:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.mt6765
 
+# In device.mk (not BoardConfig.mk)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=0 \
+    ro.debuggable=1 \
+    persist.sys.usb.config=adb \
+    sys.usb.config=adb
+
+
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 28
 
