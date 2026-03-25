@@ -75,12 +75,15 @@ TARGET_RECOVERY_USB_CONFIGFS := false
 TARGET_RECOVERY_USB_VID := 0x22D9
 TARGET_RECOVERY_USB_PID := 0x2765
 
-# Force ADB debugging and permissive mode
-ADDITIONAL_DEFAULT_PROPERTIES += \
+# Old section hata kar ye daal:
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+
+# ADB aur Debugging ke liye ye standard flags use kar:
+# Ye flags build system accept kar lega bina error ke
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0 \
     ro.debuggable=1 \
     persist.sys.usb.config=adb \
     sys.usb.config=adb
-# Force ADB Legacy mode for MTK
-TARGET_RECOVERY_DEVICE_MODULES += adb_debug
+
 
