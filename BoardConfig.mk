@@ -82,3 +82,6 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.debuggable=1 \
     persist.sys.usb.config=adb \
     sys.usb.config=adb
+# Force ADB Legacy mode for MTK
+TARGET_RECOVERY_DEVICE_MODULES += adb_debug
+
