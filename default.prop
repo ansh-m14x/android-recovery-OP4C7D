@@ -1,0 +1,24 @@
+#
+# ADDITIONAL_DEFAULT_PROPERTIES
+#
+ro.debuggable=1
+ro.adb.secure=0
+ro.allow.mock.location=0
+persist.sys.usb.config=mtp,adb
+
+# USB Controller (Sabse Important)
+sys.usb.controller=musb-hdrc
+sys.usb.configfs=1
+sys.usb.ffs.ready=0
+
+# Branding (Oppo A31 Specific)
+ro.product.model=CPH2015
+ro.product.brand=oppo
+ro.product.name=CPH2015
+ro.product.device=OP4C7D
+
+# Recovery settings
+ro.secure=0
+ro.build.type=userdebug
+persist.service.adb.enable=1                                     
+persist.service.debuggable=1
