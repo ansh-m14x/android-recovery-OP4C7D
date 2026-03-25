@@ -76,7 +76,6 @@ TARGET_RECOVERY_USB_VID := 0x22D9
 TARGET_RECOVERY_USB_PID := 0x2765
 
 # Force ADB debugging and permissive mode
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
     ro.debuggable=1 \
