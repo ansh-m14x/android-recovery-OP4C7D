@@ -20,6 +20,3 @@ PRODUCT_SHIPPING_API_LEVEL := 28
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
-
-# Inherit the proprietary files
-$(call inherit-product, vendor/oppo/OP4C7D/OP4C7D-vendor.mk)
