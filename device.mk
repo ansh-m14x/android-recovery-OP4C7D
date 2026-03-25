@@ -6,13 +6,15 @@
 
 # Product characteristics
 PRODUCT_CHARACTERISTICS := default
-
-# Core Files (Directly from your main folder)
-# Inhe ramdisk mein sahi jagah map kar rahe hain
+# Core Files Mapping
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery.fstab:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.mt6765 \
+    $(LOCAL_PATH)/recovery.fstab:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/recovery.fstab \
     $(LOCAL_PATH)/init.mt6765.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.mt6765.rc \
     $(LOCAL_PATH)/init.mt6765.usb.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.mt6765.usb.rc
+
+# Extra: Agar first stage mount chahiye (Optional but safer for MTK)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery.fstab:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.mt6765
 
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 28
